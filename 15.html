@@ -1,0 +1,20 @@
+<script>
+let month = parseInt(Math.random()*12+1)
+document.write(month+"<br>")
+let days = 0;
+switch(month){
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+        document.write("31" + "<br>")
+        days = 31
+        break;
+    case 2:
+        days = 28
+        document.write("28" + "<br>")
+        break;
+    default:
+        days = 30
+        document.write("30" + "<br>")
+        break;
+}
+document.write(`${month}月有${days}天`)
+</script>
