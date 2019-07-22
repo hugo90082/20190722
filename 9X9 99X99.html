@@ -1,0 +1,33 @@
+<script>
+
+
+</script>
+
+<table border="1" width="100%">
+        <script>
+            const ROW = 7;
+            const START = 2;
+            const nTD = 3;
+        for(let k=0;k<ROW;k++){
+            document.write("<tr>")
+            for (let i = START; i <(nTD+START); i++) {
+                let newi = i + k * nTD
+               
+                let isPink;
+                if(nTD % 2==0){
+                    isPink = (newi+k)%2 == 0;
+                }else{
+                    isPink = newi%2==0;
+                }
+                document.write("<td bgcolor='"+(isPink?"pink":"yellow")+"'>")
+                for (let j = 1; j <= 19; j++) {
+                    let r = newi * j;
+                    document.write(`${newi} X ${j} = ${r} <br>`);
+                }
+                //if(i%5==0)
+                document.write("</td>");
+            }
+            document.write("</tr>")
+        }
+         </script>
+</table>
