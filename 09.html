@@ -1,0 +1,29 @@
+year:<input>
+<input type="button" value="是否閏年" id="year" onclick="doyear()"/>
+<span id="result"></span>
+<script>
+    function doyear(){
+        let year = document.getElementById('year').value;
+        year = parseInt(year);
+        let isok;
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    isok = true
+                } else {
+                    isok = false
+                }
+            } else {
+                isok=true
+            }
+        } else {
+            isok=false
+        }
+        document.getElementById(result).innerHTML = isok
+            isok? '閏年':'平年';
+
+        document.write("<hr>");
+
+    }
+    
+</script>

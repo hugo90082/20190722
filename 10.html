@@ -1,0 +1,35 @@
+<script>
+    function doCal() {
+        let op = document.getElementById("op");
+        console.log(op.selectedIndex);
+
+        let x = document.getElementById('X').value;
+        let y = document.getElementById('Y').value;
+        x = parseInt(x); y = parseInt(y);
+        let z = '';
+        if (op.selectedIndex==0){
+            z=x+y;
+        }else if (op.selectedIndex==1){
+            z=x-y;
+        } else if (op.selectedIndex == 2) {
+            z = x * y;
+        } else if (op.selectedIndex == 3) {
+            z = x / y;
+        }
+
+        //let z = x + y;
+        //alert(z);
+        document.getElementById('result').innerHTML = z;
+    }
+</script>
+<input type="number" id="X">
+<select id="op">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+</select>
+
+<input type="number" id="Y">
+<input type="button" value="=" onclick="doCal()">
+<span id="result"></span>
