@@ -36,9 +36,25 @@ function createTWIDByGender(gender) {
 }
 function createTWIDByAll(area,gender) {
     area=document.getElementById("area").value;
-    gender = document.getElementById("boy").value;
-    document.write(area+ gender);
+    gender = document.querySelector('input[name="gender"]:checked').value;
+    let n = [];
+    //document.getElementById("id").value=area+ gender;
+    let newID= area+gender;
+    do{
+        for (let i=0;i<8;i++){
+        n[i]=parseInt(Math.random()*10);
+        newID+=n[i];
+        //document.getElementById("id").value+=n[i]; 
+        }
+    }while(checkIDTW(newID)==true);
+        document.getElementById("id").value=newID;
+    
+
+    // while(checkIDTW){
+
+    // }
     
     
+
     return; 
 }
