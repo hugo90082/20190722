@@ -1,0 +1,39 @@
+<script>
+let poker=[];
+for(let i=0;i<52;i++){
+    poker[i]=i;
+}
+
+    for (let i = poker.length-1; i>0 ; i--) {
+        let rand=parseInt(Math.random()*(i+1));
+        [poker[i],poker[rand]]=[poker[rand],poker[i]];
+        
+    }
+    for (let i in poker) {
+        document.write(poker[i]+"<br>");
+    }
+document.write("<hr>");
+let players = [[],[],[],[]];
+for(let i=0;i < poker.length; i++){
+    players[i%4].push(poker[i]);
+}
+    document.write("<hr>");
+    for(let i in players[0]){
+        document.write(players[1][i]+"<br>")
+    }
+    document.write("<hr>");
+</script>
+<table border="1" width="100%">
+<script>
+    for(let j of players){  
+        document.write("<tr>");
+        for (let i of players[j]) {
+            document.write("<td>");
+            document.write(players[j][i] + "<br>")
+            document.write("</td>");
+        }
+        document.write("</tr>");
+    } 
+</script>
+
+</table>

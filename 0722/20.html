@@ -1,0 +1,33 @@
+<script>
+let a =[];
+let b =[1,2,3,4];
+let c = new Array();
+let d = new Array(7);//no
+let e = new Array(1,2,3,4);
+document.write(a instanceof Array);//是不是物件實體
+document.write(a instanceof Date);
+document.write(c instanceof Array);
+document.write(d.length+"<br>");
+
+a.push(1); a.push(221); a.push(551);
+document.write(a.length + "<br>");
+
+for(let i=0;i<a.length;i++){
+    document.write(a[i]+"<br>");
+}
+document.write("<hr>")
+a[7]=2000;
+    for (let i = 0; i < a.length; i++) {
+        document.write(a[i] + "<br>");
+    }
+    document.write("<hr>");
+
+for(let i in a){//就不會出現undefined
+    document.write(a[i] + "<br>");
+}
+document.write("<hr>");
+document.write(a.toString());
+document.write("<hr>");
+document.write(a.pop());//push放進去 pop拿出來 先進先出
+
+</script>
