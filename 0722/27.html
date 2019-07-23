@@ -1,0 +1,14 @@
+<input type="number" id="n">
+<input type="button" value="=" onclick="sum()">
+<span id="result"></span>
+
+<script>
+    function sum(){
+        let n = document.getElementById("n").value;
+        let i = 1,sum = 0;
+        while(i<=n)sum += i++;
+        document.getElementById('result').innerHTML = sum;
+    }
+
+
+</script>
