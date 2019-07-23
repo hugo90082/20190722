@@ -1,10 +1,16 @@
 <script src="utils.js"></script>
 <script>
-    let id= "W123456789";
-    if (checkID(id)){
-        document.write("OK")
-    }else{
-        document.write("XX")
-    };
-
+    function checkID(){
+        let mesg = document.getElementById('mesg');
+        let id=document.getElementById('id').value
+        mesg.innerHTML= checkIDTW(id)?'':'ID Error';
+    }
 </script>
+<form>
+    Name:<input type="text"/><br>
+    ID:<input type="text" id="id" onblur="checkID()"/>
+    <span id="mesg"></span><br>
+    Gender:<input type="radio" name="gender" />Male
+    <input type="radio" name="gender" />Female
+
+</form>
