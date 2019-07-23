@@ -1,0 +1,44 @@
+<script>
+
+function sayYa(){
+    document.write("ya"+"<br>");
+}
+function sayYa2(name, name2){
+    document.write(`Ya! ${name}& ${name2} <br>`);
+}
+function sayYa4(names) {
+    if(names instanceof Array){
+        for (let name of names){
+            document.write(`Ya! ${name} <br>`);
+        }
+    }
+}
+function say5(...names){
+    //document.write(typeof nemes + Array.isArray(names)+"<br>")
+    for (let name of names) {
+        document.write(`Ya! ${name} <br>`);
+    }
+}
+
+
+sayYa2("hugo");
+sayYa2("hugo","tom");
+sayYa4(['BB','AA','zz','qq'])
+sayYa();
+document.write("<hr>");
+say5();
+document.write("<hr>");
+say5('HHHH');
+document.write("<hr>");
+say5('HHHH','lcvij','hugo');
+
+let fxy = function(x,y){
+    return 2*x+y;
+}
+document.write(fxy(10,3)+"<br>")
+
+let newfxy =fxy;
+document.write(newfxy(4, 3) + "<br>")
+
+
+</script>
