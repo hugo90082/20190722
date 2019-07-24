@@ -1,5 +1,5 @@
 0~n之間的質數有哪些<br>
-請輸入n為:
+請輸入n為：
 <input type="text" id="n" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
 
 <input type="button" id="create" value="產生" onclick="createPrime();" />
@@ -19,21 +19,17 @@
                 }
             }
             return true;
-        
-
         }
-
     }
-
-
 
     function createPrime(){
         n = document.getElementById("n").value; 
+        document.write(`0到${n}之間的質數有：(黃色區塊為質數)<br>`);
         document.write("<table border='1' style='border-collapse: collapse' width='100%'>");
         document.write("<tr>");
-        for (let i = 1;i<n;i++){
+        for (let i = 1;i<n;i++){//各個數字塞入function
             if (isPrimeNum(i)==true){
-                document.write("<td style='color:red'>");
+                document.write("<td bgcolor='yellow' style='color:red'>");
                 document.write(i); 
             }else{
                 document.write("<td style='color:black'>");
@@ -45,10 +41,6 @@
             }
                 
         }
-            
-        
-        
-        
         
         document.write("</table>")
     }
