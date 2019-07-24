@@ -1,0 +1,57 @@
+0~n之間的質數有哪些<br>
+請輸入n為:
+<input type="text" id="n" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+
+<input type="button" id="create" value="產生" onclick="createPrime();" />
+
+<script>
+    function isPrimeNum(v) {//判断是否為質數
+        if(v<2){
+            return false;
+        }else if(v==2){
+            return true;
+        }else if(v%2==0){
+            return false;
+        }else{
+            for (let i = v-1; i > 2; i--) {
+                if (v % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        
+
+        }
+
+    }
+
+
+
+    function createPrime(){
+        n = document.getElementById("n").value; 
+        document.write("<table border='1' style='border-collapse: collapse' width='100%'>");
+        document.write("<tr>");
+        for (let i = 1;i<n;i++){
+            if (isPrimeNum(i)==true){
+                document.write("<td style='color:red'>");
+                document.write(i); 
+            }else{
+                document.write("<td style='color:black'>");
+                document.write(i);
+            }
+            document.write("</td>");
+            if (i % 10 == 0){
+                document.write("</tr>");
+            }
+                
+        }
+            
+        
+        
+        
+        
+        document.write("</table>")
+    }
+</script>
+
+
