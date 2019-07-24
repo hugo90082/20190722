@@ -8,6 +8,7 @@
     function changeMD(){
         area = document.getElementById("area").value;
         gender = document.querySelector('input[name="gender"]:checked').value;
+        
         if (area != "" && gender != "") {
             newID=createTWIDByAll(area, gender);
         } else if (area == "" && gender != "") {//沒選地區
@@ -17,7 +18,7 @@
         } else if(area == "" && gender == ""){//都不選
             newID = creaetTWID();
         }else{
-            document.getElementById("id").value="你一定有什麼沒選到"
+            newID ="你一定有什麼沒選到";
         }
         document.getElementById("id").value = newID;
     }
@@ -52,12 +53,9 @@
         <option value="Y">陽明山
         <option value="Z">連江縣
         </option>
-    </select>
-
-<br>
+    </select><br><br>
     ID:<input type="text" id="id" onblur="checkID();" />
-    <span id="mesg"></span><br>
-
+    <span id="mesg"></span><br><br>
     性別:<input type="radio" name="gender" value="1"/>男
     <input type="radio" name="gender" value="2" />女
     <input type="radio" name="gender" value="" checked />不選性別

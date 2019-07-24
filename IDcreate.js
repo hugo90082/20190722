@@ -3,7 +3,6 @@ function checkIDTW(id) {
     let regex = /^[A-Z][12][0-9]{8}$/;
     let letters='ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
-
     if(id.match(regex)!=null){
         //ret = true;
         let c1 = id.charAt(0);
