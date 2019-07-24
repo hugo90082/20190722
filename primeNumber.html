@@ -24,26 +24,29 @@
 
     function createPrime(){
         n = document.getElementById("n").value; 
-        document.write(`0到${n}之間的質數有：(黃色區塊為質數)<br>`);
-        document.write("<table border='1' style='border-collapse: collapse' width='100%'>");
-        document.write("<tr>");
-        for (let i = 1;i<n;i++){//各個數字塞入function
-            if (isPrimeNum(i)==true){
-                document.write("<td bgcolor='yellow' style='color:red'>");
-                document.write(i); 
-            }else{
-                document.write("<td style='color:black'>");
-                document.write(i);
-            }
-            document.write("</td>");
-            if (i % 10 == 0){
-                document.write("</tr>");
-            }
+        if (n!=""){
+            document.write(`0到${n}之間的質數有：(黃色區塊為質數)<br>`);
+            document.write("<table border='1' style='border-collapse: collapse' width='100%'>");
+            document.write("<tr>");
+            for (let i = 1;i<=n;i++){//各個數字塞入function
+                if (isPrimeNum(i)==true){
+                    document.write("<td bgcolor='yellow' style='color:red'>");
+                    document.write(i); 
+                }else{
+                    document.write("<td style='color:black'>");
+                    document.write(i);
+                }
+                document.write("</td>");
+                if (i % 10 == 0){
+                    document.write("</tr>");
+                }
                 
+            }
+        
+            document.write("</table>")
+            }
         }
         
-        document.write("</table>")
-    }
 </script>
 
 
