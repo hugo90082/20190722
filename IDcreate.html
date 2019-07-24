@@ -3,7 +3,7 @@
     function checkID(){
         let mesg = document.getElementById('mesg');
         let id=document.getElementById('id').value
-        mesg.innerHTML= checkIDTW(id)?'正確':'ID Error';
+        mesg.innerHTML= checkIDTW(id)?'自動驗證:正確':'ID Error';
     }
     function changeMD(){
         area = document.getElementById("area").value;
@@ -55,12 +55,13 @@
     </select>
 
 <br>
-    ID:<input type="text" id="id" onblur="" />
+    ID:<input type="text" id="id" onblur="checkID();" />
     <span id="mesg"></span><br>
 
     性別:<input type="radio" name="gender" value="1"/>男
     <input type="radio" name="gender" value="2" />女
     <input type="radio" name="gender" value="" checked />不選性別
     <input type="button" id="create" value="產生" onclick="changeMD();checkID();"/>
+    <input type="button" value="驗證" onclick="checkID();" />
 
 </form>
