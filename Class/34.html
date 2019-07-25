@@ -1,0 +1,19 @@
+<script>
+
+let a = [];
+a['name']='hugo';
+a['age']='20';
+document.write(a['name']+":"+a['age']+"<br>");
+a.push(123);
+a.push(00999);
+for(let key in a){
+    document.write(key + " => " + a[key] + "<br>");
+}
+document.write("<hr>");
+
+a['eat']=function(){
+    document.write(this.name + " eat something.<hr>");
+}
+a.eat();
+
+</script>

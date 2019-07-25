@@ -1,0 +1,36 @@
+<script>
+let body = document.createElement('body')
+document.body = body;
+
+let header = document.createElement('h1');
+let h1Text = document.createTextNode('hugoe')
+header.appendChild(h1Text)
+//header.innerHTML = 'CY super big company';
+
+document.body.appendChild(header);
+
+let hr = document.createElement('hr')
+    document.body.appendChild(hr);
+
+let ul = document.createElement('ul')
+    document.body.appendChild(ul);
+
+let ritem;
+for (let i = 0; i<4;i++){
+    let item = document.createElement('li')
+    item.innerHTML=`${i+1}ITEM`
+    ul.appendChild(item);//add小朋友
+
+    if(i==2)ritem=item;
+}
+ul.removeChild(ritem);
+
+let hr2 = hr.cloneNode();
+document.body.appendChild(hr2);
+
+let ul2 = ul.cloneNode()
+document.body.appendChild(ul2);
+
+
+
+</script>
