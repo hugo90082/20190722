@@ -1,0 +1,56 @@
+<h1 id="head"></h1>
+<hr>
+<input type="button" value="Clear" onclick="clearCanvas()">
+<input type="button" value="<" onclick="moveLeft()">
+<input type="button" value=">" onclick="moveRight()">
+<hr>
+<canvas id="canvas" width="800" height="530" style="border: 1px solid black"></canvas>
+<script>
+    let isDrag;
+    head.innerHTML = 'CY'
+    let ctx = canvas.getContext('2d');//取得渲染
+
+    ctx.strokeStyle = 'rgb(0,0,255)';
+    
+
+
+    canvas.onmousedown = function(event){
+        isDrag = true
+        ctx.beginPath();
+        ctx.moveTo(event.offsetX, event.offsetY);
+    }
+    canvas.onmouseup = function () {
+        isDrag = false
+    }
+    canvas.onmousemove = function (event) {
+        if(!isDrag)return
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+
+        console.log("Drag:"+event.offsetX+"X"+event.offsetY+"Y")
+    }
+let ball = new Image();
+let ballX = 200
+let ballY = 200
+ball.src = 'ball.png';
+ball.onload = function(){
+    ctx.drawImage(ball,ballX,ballY)
+}
+
+function moveLeft(){
+    ballX-=10
+    clearCanvas()
+    ctx.drawImage(ball, ballX, ballY)
+}
+function moveRight(){
+    ballX += 10
+    clearCanvas()
+    ctx.drawImage(ball, ballX, ballY)
+}
+
+function clearCanvas(){
+    ctx.clearRect(0,0,800,530)
+}
+
+
+</script>
