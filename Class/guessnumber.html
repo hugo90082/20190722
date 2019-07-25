@@ -1,0 +1,54 @@
+
+<script src="utils.js"></script>
+<script>
+    let d = 3;
+    let answer = createAnswer(d);
+    function test(){//測試區
+        answer = createAnswer();
+        document.getElementById('log').innerHTML=answer;
+    }
+    let userAnswer='';
+    let times = 0;
+    
+    function doGuess(){
+        let guess = document.getElementById('input').value;
+        let result = checkAB(answer,guess);
+        times++;
+        
+        userAnswer+= times+" : "+guess+"=>"+result+"<br>";
+        alert(`${guess}=>${result}`)
+        document.getElementById('log').innerHTML = userAnswer;
+        document.getElementById('input').value='';
+        if(result == `${d}A0B`){
+            alert('恭喜');
+            replay();
+        }else if (times == 3){
+            alert(`Loser:${answer}`);
+            replay();
+        }
+        document.getElementById('input').focus();
+    }
+    function replay(){
+        answer = createAnswer(d);
+        userAnswer = '';
+        times = 0;
+        document.getElementById('input').value = '';
+        document.getElementById('input').focus();
+        console.log(answer);
+    }
+    console.log(answer);
+</script>
+
+<h1>Guess Number Game</h1>
+<hr>
+<input type="number" id="input"/>
+<input type="button" value="Guess" onclick="doGuess()" />
+<input type="button" value="replay" onclick="replay()" />
+<select id="time">
+    <option selected>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+</select>
+<hr>
+<div id="log"></div>
