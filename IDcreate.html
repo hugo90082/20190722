@@ -56,16 +56,20 @@
         <option value="Z">連江縣
         </option>
     </select><br><br>
-    ID:<input type="text" id="id" />
+    ID:<input type="text" id="id" onblur="checkID();" />
+    <!-- <input type="text" id="id" /> -->
+
     <span id="mesg"></span><br><br>
     性別:<input type="radio" name="gender" value="1"/>男
     <input type="radio" name="gender" value="2" />女
     <input type="radio" name="gender" value="" checked />不選性別
-    <button id="create"/>產生</button>
-    <button id="check" />驗證</button>
+    <input type="button" id="create" value="產生" onclick="changeMD();checkID();" />
+    <input type="button" value="驗證" onclick="checkID();" />
+    <!-- <button id="create"/>產生</button>
+    <button id="check" />驗證</button> -->
 <script>
-    document.getElementById("create").addEventListener("click", changeMD());
-    document.getElementById("check").addEventListener("click", checkID());
+    //document.getElementById("create").addEventListener("click", changeMD());
+    //document.getElementById("check").addEventListener("click", checkID());
     //這裡還有點問題
 </script>
 </form>

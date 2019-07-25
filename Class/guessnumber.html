@@ -1,7 +1,21 @@
-
 <script src="utils.js"></script>
+<h1>Guess Number Game</h1>
+<hr>
+<input type="text" id="input"
+    onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+<input type="button" value="Guess" onclick="doGuess()" />
+<input type="button" value="replay" onclick="replay()" />
+<select id="guessTime">
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+<hr>
+<div id="log"></div>
+
 <script>
-    let d = 3;
+    let d = document.getElementById('guessTime').value;
     let answer = createAnswer(d);
     function test(){//測試區
         answer = createAnswer();
@@ -22,13 +36,14 @@
         if(result == `${d}A0B`){
             alert('恭喜');
             replay();
-        }else if (times == 3){
+        }else if (times == 10){
             alert(`Loser:${answer}`);
             replay();
         }
         document.getElementById('input').focus();
     }
     function replay(){
+        d = document.getElementById('guessTime').value;
         answer = createAnswer(d);
         userAnswer = '';
         times = 0;
@@ -39,16 +54,3 @@
     console.log(answer);
 </script>
 
-<h1>Guess Number Game</h1>
-<hr>
-<input type="number" id="input"/>
-<input type="button" value="Guess" onclick="doGuess()" />
-<input type="button" value="replay" onclick="replay()" />
-<select id="time">
-    <option selected>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-</select>
-<hr>
-<div id="log"></div>
