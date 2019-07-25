@@ -1,0 +1,31 @@
+<script>
+
+let bike = new Object();
+document.write(typeof bike +"<br>");
+bike.speed =0;//物件最重要的是屬性
+bike.gear = 1;
+bike.upSpeed =function(){
+    this.speed = this.speed<1>0?1:this.speed*this.gear*1.2;
+}
+bike.downSpeed = function(){
+    this.speed = this.speed<1?0:this.speed*0.7;
+}
+bike.upSpeed(); bike.upSpeed(); bike.upSpeed(); bike.upSpeed(); bike.downSpeed();
+
+document.write(bike.speed + "<hr>");
+//--------------------------------------------------------------------
+let bike2 ={//等同上方做法
+    speed : 0,
+    gear : 1,
+    upSpeed : function(){
+        this.speed = this.speed < 1 > 0 ? 1 : this.speed * 1.2;
+    },
+    downSpeed : function(){
+        this.speed = this.speed < 1 ? 0 : this.speed * 0.7;
+    },
+}; 
+
+
+
+
+</script>

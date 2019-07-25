@@ -1,0 +1,34 @@
+<script>
+    let counter=0;
+    let timer=null;
+    let isRunning=false;
+    function Start(){
+        if (isRunning)return
+        timer = setInterval(doThing,1*100)
+        isRunning = true;
+    }
+    function doThing(){
+        counter++;
+        document.getElementById('counter').innerHTML=counter;
+    }
+    function pause(){
+        if (timer != null) {
+            clearInterval(timer);
+        }
+        isRunning = false;
+    }
+    function zero(){
+        if (timer != null) {
+            clearInterval(timer);
+        }
+        counter = 0;
+        document.getElementById('counter').innerHTML = counter;
+        isRunning = false;
+    }
+</script>
+
+Timer：<span id="counter">0</span>
+<hr>
+<input type="button" value="Start" onclick="Start()" />
+<input type="button" value="Pause" onclick="pause()" />
+<input type="button" value="Zero" onclick="zero()" />
