@@ -1,0 +1,70 @@
+<script>
+class Bike{
+    constructor(speed){
+        document.write("bike"+"<br>")
+        this.speed=speed
+        this.name='HHHFFF'
+    }
+    upspeed(){
+        document.write("b up" + "<br>")
+    }
+    static m1(){
+        document.write("bikm1()" + "<br>")
+    }
+}
+class Scooter extends Bike{
+    constructor(speed,gear){
+        document.write("scooter()" + "<br>")
+        super(speed);
+        this.speed=speed
+        this.gear=gear
+    }
+    
+    
+    chGear(gear){
+        document.write("SSSSSgear()" + "<br>")
+        this.gear = gear;
+    }
+    upspeed(){
+        super.upspeed();//呼叫父類別原方法
+        document.write("UUUgear()" + "<br>")
+    }
+}
+
+class Brad{
+    constructor(...x){
+        document.write("brad()" + "<br>")
+    }
+
+}
+
+
+let b1 = new Bike(123);
+b1.upspeed();
+document.write(b1.speed + "<br>")
+
+let s1 = new Scooter(234,1);
+s1.upspeed();
+s1.chGear(4);
+document.write(s1.speed + "<br>")
+document.write(b1 instanceof Bike)
+document.write( "<br>")
+document.write(s1 instanceof Bike)
+document.write("<br>")
+document.write(b1 instanceof Scooter)
+document.write("<br>")
+document.write(s1 instanceof Scooter)
+document.write("<br>")
+
+let brad1 = new Brad();
+let brad2 = new Brad(2);
+let brad3 = new Brad(3,3,5);
+
+
+//Math.random()
+Bike.m1();
+//Scooter.m1()
+
+
+
+</script>

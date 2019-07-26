@@ -1,0 +1,36 @@
+<script>
+let strJSON = `[
+        {
+            "ID": "100",
+            "Name": "銅鑼杭菊美人茶",
+            "Feature": "苗栗縣銅鑼地區於民國50年代開始種植杭菊，由中藥材變農村觀光休閒。今花茶系列飲品加入東方美人茶，沖泡後更有意想不到之風味。\r\n",
+            "SalePlace": "苗栗縣銅鑼鄉永樂路22號",
+            "ProduceOrg": "銅鑼鄉農會",
+            "SpecAndPrice": "金菊75g、杭白菊75g、東方美人茶75g",
+            "OrderUrl": "",
+            "ContactTel": "(037) 981-531 #18",
+            "Column1": "https://ezgo.coa.gov.tw/Uploads/opendata/BuyItem/APPLY_D/20151026161106.jpg"
+        },
+        {
+            "ID": "101",
+            "Name": "曬幸福-阿婆的手造品",
+            "Feature": "每年冬季芥菜豐收時，客家庄的婦女展現醃晒好手藝，將芥菜製成酸菜、福菜、梅乾菜保存，並製作各具風味的佳餚，芥菜含有豐富的胡蘿蔔素、維生素B群、維生素C，及鐵等營養素，是值得讓您回味起客家阿婆的好味道。\r\n",
+            "SalePlace": "苗栗縣三義鄉龍騰村外庄10號",
+            "ProduceOrg": "舊山線休閒農業區、\n三義鄉農會",
+            "SpecAndPrice": "福菜360g×1、梅干菜100g",
+            "OrderUrl": "",
+            "ContactTel": "(037) 881-700",
+            "Column1": "https://ezgo.coa.gov.tw/Uploads/opendata/BuyItem/APPLY_D/20151026161215.jpg"
+        }
+    ]`;
+
+   // document.write(strJSON);
+
+strJSON = strJSON.replace(/(\r\n|\n)/g,'')
+let data = JSON.parse(strJSON);
+//document.write(data.name);
+    for (let row of data) {
+        document.write(row.Name + ":" + row.ContactTel + "<br>")
+    }
+
+</script>

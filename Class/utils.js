@@ -72,8 +72,9 @@ function clone(source) {
 Date.prototype.getTWYear = function(){//功能擴充 民國年
     return this.getFullYear()-1911;
 }
-Date.prototype.getCWeek = function(){
+Date.prototype.getCWeek = function(){ //this寶寶
     let w = this.getDay();
     let ws = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
     return ws[w];
 }
+
