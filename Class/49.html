@@ -1,0 +1,13 @@
+<script src="utils.js"></script>
+<meta charset="utf-8">
+<script>
+
+setInterval(() => {
+    let clock = new Date();
+    let clockStr=clock.getTWYear() + "-" +(clock.getMonth()+1)+"-" +clock.getDate() + "-" + clock.getCWeek();
+
+    now.innerHTML = clockStr;
+}, 1*1000);
+
+</script>
+目前日期時間:<span id="now"></span>

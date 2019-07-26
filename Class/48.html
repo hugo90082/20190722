@@ -3,18 +3,21 @@
 let bike = function(name,speed){
     this.name = name;
     this.speed = speed;
+    this.chSpeed = function(speed){
+        document.write("debug4")
+    }
 
 }
-bike.chSpeed = function(speed){
-    document.write("debug3")
-    this.speed = speed;
-}
-bike.prototype.chSpeed = function(speed){
-    document.write("debug")
-}
+// bike.chSpeed = function(speed){
+//     document.write("debug3")
+//     this.speed = speed;
+// }
+// bike.prototype.chSpeed = function(speed){
+//     document.write("debug")
+// }
 
 
-let b1 = new bike('hugo',12)
+let b1 = new bike('hugo',12)//定義
 
 b1.chSpeed = function(speed){
     document.write("debug2")
