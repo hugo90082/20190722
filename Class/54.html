@@ -1,0 +1,35 @@
+<script>
+
+let xhttp = new XMLHttpRequest();
+function test1(){
+
+
+    xhttp.onreadystatechange=function(){
+        switch(this.readyState){
+            case 1:
+                stat1.innerHTML = 'OK';break;
+            case 2:
+                stat2.innerHTML = 'OK'; break;
+            case 3:
+                stat3.innerHTML = 'OK'; break;
+            case 4:
+                stat4.innerHTML = 'OK'; break;
+        }
+    }
+    xhttp.open("GET","br01.php",true)
+    xhttp.send();
+}
+
+
+
+</script>
+<input type="button" value="test1" onclick="test1()">
+<div id="stat1"></div>
+<div id="stat2"></div>
+<div id="stat3"></div>
+<div id="stat4"></div>
+
+<form method="POST" action="br01.php">
+    <input type="file" name="upload"/>
+    <input type="submit" value="Upload"/>
+</form>
