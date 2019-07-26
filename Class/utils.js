@@ -54,8 +54,17 @@ function checkAB(ans,gus){
     return `${a}A${b}B`;
 }
 
-function clone(source){
-    //if (null == source || "object" != typeof source) return source;
-    if(source == null || typeof(source)!='object') return null;
+function clone(source) {
+    if (source == null || typeof (source) != 'object') return null;
 
+    let target = new Object();
+    for (let attr in source) {
+        if (typeof (source[attr]) != 'object') {
+            target[attr] = source[attr];
+        } else {
+            target[attr] = clone(source[attr]);
+        }
+    }
+
+    return target;
 }

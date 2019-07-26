@@ -1,0 +1,22 @@
+<script>
+
+let bike =function(){
+    console.log("a bike constructor" );
+    this.a = 12;
+    this.b = 34;
+}
+let b1 = new bike()
+
+bike.prototype.x=111;
+document.write(b1.x +"<br>")
+
+bike.prototype.b = 222;
+document.write(b1.b + "<br>")
+
+let b2 = new bike()
+b2.a=56;b2.c=78;
+document.write(b2.a + "<br>")    
+document.write(b2.b + "<br>")
+document.write(b2.c + "<br>")
+document.write(b2.x + "<br>")
+</script>
