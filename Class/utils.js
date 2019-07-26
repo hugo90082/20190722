@@ -53,3 +53,9 @@ function checkAB(ans,gus){
     }
     return `${a}A${b}B`;
 }
+
+function clone(source){
+    //if (null == source || "object" != typeof source) return source;
+    if(source == null || typeof(source)!='object') return null;
+
+}

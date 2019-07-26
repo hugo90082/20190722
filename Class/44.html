@@ -1,0 +1,71 @@
+<script src="utils.js"></script>
+<h1 id="head"></h1>
+
+<hr>
+<canvas id="canvas" width="480" height="320" style="border: 1px solid black"></canvas>
+<script>
+
+    head.innerHTML = 'CY'
+    let ctx = canvas.getContext('2d');//取得渲染
+    let bg = new Image()
+    let ball1 = new Image();
+    let ball2 = new Image();
+    let ball3 = new Image();
+    bg.src = 'bg.jpg';
+    ball1.src = 'ball1.png';
+    ball2.src = 'ball2.png';
+    ball3.src = 'ball3.png';
+    let ballImg=[ball1,ball2,ball3];
+    let balls = [];
+    let ballObj = {
+        x:0,
+        y:0,
+        dx : 8,
+        dy : 8,
+        img : 0
+    };
+
+    let ballX = 0
+    let dx = 8
+    let ballY = 0
+    let dy = 8
+    bg.onload = function () {
+        ctx.drawImage(bg, 0, 0)
+    }
+
+    canvas.onmousedown = function (event) {//event事件被接收
+        let ball = clone(ballObj);
+        ball.x=event.offsetX-24
+        ball.y = event.offsetY - 24
+        ball.img = parseInt(Math.random()*ballImg.length)
+        balls.push(ball);
+
+        // ballX= event.offsetX - 24
+        // ballY = event.offsetY - 24
+
+
+    }
+
+    function refreshView(){
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.drawImage(bg, 0, 0)
+
+        for(let i of balls){
+            ctx.drawImage(ballImg[ball.img], ball.x, ball.y);
+        }
+
+    }
+    setInterval(refreshView,17);
+
+    // function moveBall(){
+    //     if(ballX < 0 || ballX+48>canvas.width){
+    //         dx *= -1
+    //     }
+    //     if (ballY < 0 || ballY + 48 > canvas.height) {
+    //         dy *= -1
+    //     }
+    //     ballX += dx
+    //     ballY += dy
+    // }
+    // setInterval(moveBall, 30);
+</script>
