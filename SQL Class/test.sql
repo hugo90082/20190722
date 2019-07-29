@@ -1,4 +1,5 @@
-SELECT bill.tel,round(avg(fee),0)as'平均金額' ,address-- 算出來的 所以要group by
+SELECT bill.tel,round(avg(fee),0)as'平均金額' ,address
+-- 算出來的 所以要group by 且上面有幾個下面就有幾個
 from bill ,phone,house
 WHERE bill.hid=phone.hid and phone.hid=house.hid 
 GROUP BY bill.tel,address
