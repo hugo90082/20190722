@@ -1,3 +1,36 @@
+
+SELECT tel,sum(fee) from bill GROUP BY tel --各自電話加總
+
+
+SELECT sum(fee) from bill;-- sum加總
+
+
+SELECT DISTINCT a.uid as '帳號',cname as '姓名',address as '住址'
+FROM userinfo as a,live as b,house as c,phone as d
+WHERE a.uid=b.uid AND
+	b.hid=c.hid AND
+    c.hid=d.hid 
+-- 刪除電話後 出來的資料重複 拿掉其一 用distinct
+
+
+
+SELECT a.uid as '帳號',cname as '姓名',address as '住址',tel as '電話'
+FROM userinfo as a,live as b,house as c,phone as d
+WHERE a.uid=b.uid AND
+	b.hid=c.hid AND
+    c.hid=d.hid 
+
+
+
+SELECT a.uid,cname,address,tel
+FROM userinfo as a,live as b,house as c,phone as d
+WHERE a.uid=b.uid AND
+	b.hid=c.hid AND
+    c.hid=d.hid 
+-- 取別名
+
+
+
 SELECT house.hid,address,cname
 FROM userinfo right join live on 
     userinfo.uid = live.uid
