@@ -1,3 +1,13 @@
+SELECT bill.tel,round(avg(fee),0)as'平均金額' ,address-- 算出來的 所以要group by
+from bill ,phone,house
+WHERE bill.hid=phone.hid and phone.hid=house.hid 
+GROUP BY bill.tel,address
+
+
+
+SELECT tel,round(avg(fee),0)as'平均金額' from bill GROUP BY tel
+--各自電話平均 round小數點下幾位
+
 
 SELECT tel,sum(fee) from bill GROUP BY tel --各自電話加總
 
