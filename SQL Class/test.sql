@@ -1,10 +1,17 @@
+SELECT year( from_days( datediff( now( ), 生日 ))) FROM userinfo WHERE uid='A01'
+-- 算幾歲
 
+SELECT * FROM bill WHERE dd NOT
+Between adddate(now(),INTERVAL -6 month) And now() -- 印出六個月以前資料
 
+SELECT * FROM bill WHERE date_format(dd, '%Y%m')='201901'-- 印出特定時間資料
 
+SELECT concat(date_format(now(), '西元%Y'),'第',quarter(now()),'季')
+-- 組合字串用concat 不能用+號
+SELECT quarter(now()) -- 第幾季
 
-
-
-
+SELECT date_format(now(), '西元%Y')
+-- 
 CREATE VIEW vw_hugo as 
 SELECT tel,aa.SUM_Fee 
 FROM(
