@@ -1,3 +1,93 @@
+
+
+
+
+
+
+
+CREATE VIEW vw_hugo as 
+SELECT tel,aa.SUM_Fee 
+FROM(
+    SELECT sum(fee) as SUM_Fee from bill
+    GROUP BY tel
+    ORDER BY SUM_Fee DESC
+    limit 1
+    )as aa ,(
+        SELECT tel , sum(fee) as SUM_Fee
+	    from bill
+	    GROUP BY tel
+    )as bb
+    WHERE aa.SUM_Fee = bb.SUM_Fee
+
+
+
+SELECT uid,maxN
+FROM(
+    SELECT MAX(n) as maxN
+    FROM(
+        SELECT userinfo.uid,count(phone.tel)as n
+        FROM userinfo LEFT JOIN live ON
+            userinfo.uid=live.uid
+            LEFT JOIN phone ON
+            live.hid = phone.hid
+        GROUP BY userinfo.uid
+        )as a
+)as aa,(
+        SELECT userinfo.uid,count(phone.tel)as n
+        FROM userinfo LEFT JOIN live ON
+            userinfo.uid=live.uid
+            LEFT JOIN phone ON
+            live.hid = phone.hid
+        GROUP BY userinfo.uid
+)as bb
+where aa.maxN=bb.n
+
+
+
+
+
+SELECT tel,max_SUM
+FROM(
+	SELECT max(SUM) as max_SUM
+	from (
+    	SELECT tel,SUM(fee) as SUM -- 先抓到表
+    	from bill
+    	GROUP BY tel) as a
+    )as aa,(
+    	SELECT tel,SUM(fee) as SUM-- 取到它最大值 之後再去join 這樣才會避免極端值重複 未被抓出來
+		from bill
+		GROUP BY tel
+    )as bb
+WHERE aa.max_SUM = bb.SUM
+
+
+
+SELECT max(SUM)
+from (
+    SELECT tel,SUM(fee) as SUM 
+    from bill
+    GROUP BY tel) as a
+
+
+SELECT *
+from (
+    SELECT tel,SUM(fee) as SUM -- 巢狀查詢
+    from bill
+    GROUP BY tel) as a
+WHERE SUM>=1000
+-- 拿底下的表 列出大於一千的 
+
+
+SELECT tel,SUM(fee) as SUM
+from bill
+GROUP BY tel
+
+
+SELECT tel,SUM(fee)
+from bill
+GROUP BY tel
+
+
 SELECT bill.tel,round(avg(fee),0)as'平均金額' ,address
 -- 算出來的 所以要group by 且上面有幾個下面就有幾個
 from bill ,phone,house
