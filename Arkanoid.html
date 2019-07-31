@@ -8,56 +8,69 @@
     let ctx = canvas.getContext('2d');    // 渲染
     let bg = new Image();
         bg.src = 'bg.jpg';
-        let ball1 = new Image();
-        let ball2 = new Image();
-        let ball3 = new Image();
-        ball1.src = 'ball1.png';
-        ball2.src = 'ball2.png';
-        ball3.src = 'ball3.png';
-        let ballImg = [ball1, ball2, ball3];
+        let ballImg = new Image();
+        let bar = new Image();
+        ballImg.src = 'ball1.png';
+        bar.src = 'bar.png';
+
         let balls = [];
         let ballObj = {
-            x: 0,
-            y: 0,
+            x: 100,
+            y: 160,
             dx: 8,
             dy: 8,
             img: 0
         };
+
+        let barX = 0;
+        canvas.onmousemove = function (event) {
+        barX = event.offsetX;
+        ctx.drawImage(bar,barX, 300);
+        ctx.stroke();
+
+        console.log("Drag:"+event.offsetX+"X"+event.offsetY+"Y")
+        }
+
         bg.onload = function () {
             ctx.drawImage(bg, 0, 0);
         }
         canvas.onmousedown = function (event) {
-            let ball = clone(ballObj);
-            ball.x = event.offsetX - 24;
-            ball.y = event.offsetY - 24;
-            ball.dx = parseInt(Math.random() * 17 - 8);
-            ball.dy = parseInt(Math.random() * 17 - 8);
-            ball.img = parseInt(Math.random() * ballImg.length);
-            balls.push(ball);
+
+            ballObj.x = event.offsetX - 24;
+            ballObj.y = event.offsetY - 24;
+            ballObj.dx = 5
+            ballObj.dy = 5
+            balls.push(ballObj);
         }
+
         function refreshView() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(bg, 0, 0);
-            for (let ball of balls) {
-                ctx.drawImage(ballImg[ball.img], ball.x, ball.y);
-            }
+            ctx.drawImage(ballImg, ballObj.x, ballObj.y);
+            ctx.drawImage(bar,barX, 300);
         }
         setInterval(refreshView, 17);
         function moveBall(obj) {
+
             if (obj.x < 0 || obj.x + 48 > canvas.width) {
                 obj.dx *= -1;
             }
             if (obj.y < 0 || obj.y + 48 > canvas.height) {
                 obj.dy *= -1;
             }
-            obj.x += obj.dx; obj.y += obj.dy;
+            obj.x += obj.dx; 
+            obj.y += obj.dy;
         }
+
         function go() {
             for (let ball of balls) {
-                moveBall(ball);
+                if(){
+                    moveBall(ball);
+                }
+                
             }
         }
-        setInterval(go, 10);
+        setInterval(go, 100);
 
     // function moveBall(){
     //     if(ballX < 0 || ballX+48>canvas.width){
