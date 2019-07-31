@@ -61,7 +61,7 @@
         let refreshInterval=setInterval(refreshView, 17);
 
         function moveBall(obj) {
-            if(obj.x<=brickX+70 && obj.x+40>=brickX && obj.y+40>=brickY && obj.y<=brickY+34 ){
+            if(obj.x<=brickX+70 && obj.x+40>=brickX && obj.y+40>=brickY && obj.y<=brickY+30 ){
                 brickBool = false;
                 clearInterval(refreshInterval);
                 clearInterval(goInterval);
