@@ -1,3 +1,116 @@
+DELIMITER $$ -- 數字改成中文國字
+CREATE FUNCTION `mathToChar`(`str` INT) RETURNS VARCHAR(100) character set gbk
+BEGIN 
+DECLARE str1 VARCHAR(1) character set gbk DEFAULT  '' ; 
+    DECLARE return_str VARCHAR(255) character set gbk DEFAULT '' ; 
+    DECLARE i INT DEFAULT 1; 
+    WHILE i < CHAR_LENGTH(str) + 1  DO 
+     SET str1 = SUBSTRING(str,i,1);         
+    CASE str1 
+    WHEN '1' THEN SET str1 ="一"; 
+    WHEN '2' THEN SET str1 ="二"; 
+    WHEN '3' THEN SET str1 ="三"; 
+    WHEN '4' THEN SET str1 ="四"; 
+    WHEN '5' THEN SET str1 ="五"; 
+    WHEN '6' THEN SET str1 ="六"; 
+    WHEN '7' THEN SET str1 ="七"; 
+    WHEN '8' THEN SET str1 ="八"; 
+    WHEN '9' THEN SET str1 ="九"; 
+	WHEN '0' THEN SET str1 ="零";
+    END CASE;         
+        SET return_str = CONCAT(return_str,str1); 
+        SET i = i + 1 ; 
+	END WHILE; 
+    RETURN return_str; 
+END $$
+DELIMITER ;
+-- UPDATE bill set fee2 =  mathToChar(fee);
+-- SELECT mathToChar(213123) AS mathTochar;
+
+
+
+delimiter $$
+create PROCEDURE pro()
+BEGIN
+	DECLARE done int default false;
+    DECLARE tmp_fee int;
+    DECLARE total int DEFAULT 0;
+    DECLARE curs cursor for SELECT fee FROM bill;
+    DECLARE CONTINUE HANDLER for not found set done=true;
+    
+    open curs;
+    FETCH curs into tmp_fee;
+    
+    WHILE not done DO
+    	set total = total + tmp_fee;
+        fetch curs into tmp_fee;
+    end WHILE;
+    
+    CLOSE curs;
+    SELECT total;
+
+END $$
+delimiter ;
+
+
+
+
+
+delimiter $$
+create procedure pro_name()
+begin
+    declare exit handler for sqlexception select 'ERROR';-- 最後ERROR這裏在離開前有機會做一些事 
+    UPDATE userinfo set cname='朱小弟'where uid = 'A04'-- 例如log
+    insert into userinfo values ('A01', null);
+end $$
+delimiter ;-- PK 重複
+
+
+
+
+CREATE FUNCTION f_add(a float,b float) RETURNS float
+RETURN a+b;
+
+
+delimiter $$
+create PROCEDURE live_where (location varchar(20))
+begin
+	SELECT * FROM vw_user WHERE address LIKE concat(location,'%');
+end $$
+delimiter ;
+
+
+
+delimiter $$
+create trigger tr_userinfo_update BEFORE UPDATE
+on userinfo for each row 
+begin
+	set @count = if(@count IS null,1,(@count+1));
+    if @count >1 THEN
+    	SIGNAL SQLSTATE '45001' set MESSAGE_TEXT='Stop!!';
+	end if;
+end $$
+delimiter ;
+-- 組指多次執行 中斷trigger
+
+delimiter $$
+create trigger tr_log_userinfo_insert after insert
+on userinfo for each row 
+begin
+	set @body = concat('將[', new.uid, ', ', new.cname, '] 加到userinfo資料表中');
+    insert into log (body) values (@body);
+end $$
+delimiter ;
+-- 建立trigger
+
+
+
+
+
+
+
+
+
 SELECT year( from_days( datediff( now( ), 生日 ))) FROM userinfo WHERE uid='A01'
 -- 算幾歲
 
