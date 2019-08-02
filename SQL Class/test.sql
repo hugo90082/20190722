@@ -1,3 +1,7 @@
+
+
+
+
 DELIMITER $$ -- 數字改成中文國字
 CREATE FUNCTION `mathToChar`(`str` INT) RETURNS VARCHAR(100) character set gbk
 BEGIN 
