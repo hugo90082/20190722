@@ -1,8 +1,13 @@
 <?php
-function ShowStar()
-{
-	echo "*****";
+function ShowStar($num ,$star){
+	$result = "";
+	for ( $i = 0;$i<$num;$i++){
+
+		$result.= $star;
+	}
+
+	return $result;
 }
 
-ShowStar();
+echo ShowStar(3,"0");
 ?>
