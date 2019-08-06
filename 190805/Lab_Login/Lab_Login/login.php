@@ -1,10 +1,37 @@
+<?php
+if(isset($_GET["signout"])){
+    //unset($_SESSION["userName"]);
+    setcookie("userName","XXX", time()-3600*24);
+    header("location:index.php");
+    exit();
+}
+if(isset($_POST["btnHome"])){
+
+    header("location:index.php");
+    exit();
+  
+  
+}
+
+
+//session_start();
+if(isset($_POST["btnOK"])){
+    if($_POST["txtUserName"]!=""){
+        setcookie("userName",$_POST["txtUserName"]);
+        header("location:index.php");
+        exit();
+    }
+    
+}
+?>
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Lab - Login</title>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="login.php">
+<form id="form1" name="form1" method="post" action="">
   <table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
     <tr>
       <td colspan="2" align="center" bgcolor="#CCCCCC"><font color="#FFFFFF">會員系統 - 登入</font></td>

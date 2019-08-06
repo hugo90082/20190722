@@ -1,3 +1,14 @@
+<?php
+//session_start();
+if(!isset($_COOKIE["userName"])){
+
+    header("location:login.php?backTo=secret.php");
+    exit();
+}
+    
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: image/png");
+header("Content-Type: image/png");//圖片格式
 
 $filename = "cc.png";
 $fileHandle = fopen($filename, "rb");

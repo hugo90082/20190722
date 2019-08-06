@@ -41,7 +41,7 @@ class CDog extends CAnimal {
 	private $_price = 0;
 	
 	function __construct($weightValue = 0, $priceValue = 0) {
-		parent::__construct($weightValue);
+		parent::__construct($weightValue);//類別::
 		$this->setPrice($priceValue);
 	}
 	
