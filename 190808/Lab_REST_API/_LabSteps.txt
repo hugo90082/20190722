@@ -51,8 +51,8 @@ switch ($method . " " . $url[0]) {
 http://localhost/專案名稱/Lab_REST_API/api/products/1
 http://localhost/專案名稱/Lab_REST_API/api/products
 例如:
-http://localhost/190720/Lab_REST_API/api/products/1
-http://localhost/190720/Lab_REST_API/api/products
+http://localhost/190808/Lab_REST_API/api/products/1
+http://localhost/190808/Lab_REST_API/api/products
 
 
 
@@ -145,7 +145,7 @@ http://localhost/專案名稱/Lab_REST_API/api/products/1
 http://localhost/專案名稱/Lab_REST_API/api/products
 例如:
 http://localhost/190720/Lab_REST_API/api/products/1
-http://localhost/190720/Lab_REST_API/api/products
+http://localhost/190808/Lab_REST_API/api/products
 
 
 
@@ -334,8 +334,15 @@ function deleteProduct($id) {
 3.3 替換所有的「/api/products」，全面改成:
 http://localhost/專案名稱/Lab_REST_API/api/products
 例如:
-http://localhost/190720/Lab_REST_API/api/products
+http://localhost/190808/Lab_REST_API/api/products
 
 
 
 3.4 在瀏覽器測試 testForm.html 的資料增刪功能
+
+
+[1,2,3,4]
+{       }類別
+,
+:
+"

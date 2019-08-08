@@ -19,6 +19,9 @@ Lab: 以 XPath 找出目標節點
 1.4	貼入內容到本文件，應該會類似這樣:
 //*[@id="news_box3"]/div[2]/ul/li[1]
 
+//*[@id="news_box3"]/div[2]/ul/li[1]
+
+
 1.5	去掉最後的 [1]，稍後我們會用到這段語法:
 //*[@id="news_box3"]/div[2]/ul/li
 

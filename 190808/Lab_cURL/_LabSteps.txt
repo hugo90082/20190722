@@ -47,6 +47,7 @@ http://us3.php.net/manual/en/function.curl-setopt.php
 1-6 下列這行，請改其選項值為 1，然後，再試用一遍程式:
     curl_setopt($ch, CURLOPT_HEADER, 1);
 
+HTTP/2 200 server: Apache content-type: text/html; charset=utf-8 content-length: 99401 date: Thu, 08 Aug 2019 07:54:46 GMT
 
 1-7 修改程式，如下，完成後，
     執行程式並且瀏覽 vardump() 輸出的陣列內容。

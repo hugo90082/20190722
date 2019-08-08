@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -16,6 +18,7 @@
 -->
 
 	<form method="post" action="http://exec.hostzi.com/echo.php">
+		<!-- $("#letter option:selected").text(); -->
 		<select name="letter" id="letter">
 			<option value="0">A</option>
 			<option value="1">B</option>
@@ -28,6 +31,26 @@
 		</select> 
 		<input type="submit" value="OK" /> 
 	</form>
+	<!-- <div id="debug"></div> -->
 
 </body>
+<script>
+$("#letter").on("change",function(){
+	var s = $("#letter option:selected").text();
+	var url = 'getLetterNumber.php?letter='+s;
+	$.ajax({
+		type:"get",
+		url:'getLetterNumber.php?letter='+s,
+		// data:JSON.stringify(dataToServer)
+		success:function(e){
+			$("#letterNumber").html(e);
+		}
+	})
+	// $.get(url, function(e){
+	// 	$("#letterNumber").html(e);
+	// })
+	$("#letter").trigger("change");
+	// $("#debug").text(s);
+})
+</script>
 </html>
