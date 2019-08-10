@@ -4,7 +4,7 @@ if (isset($_GET["logout"]))
 {
   unset($_SESSION["userName"]);
   unset($_SESSION["txtUserName"]);
-	header("Location: login.php");
+	header("Location: index.php");
 	exit();
 }
 
@@ -28,8 +28,6 @@ if (isset($_POST["btnOK"]))
         $dbh->exec("SET CHARACTER SET utf8");
         
         $dbh->beginTransaction();
-
-        // 
         $cmd = $dbh->prepare("select PWD from user where name = :name ");
 
         $cmd->bindValue(":name", $sUserName);
@@ -37,9 +35,8 @@ if (isset($_POST["btnOK"]))
         $row = $cmd->fetch();
 
         $_SESSION["userName"]=$sUserName;
-        if ($row["PWD"]==$userPwd){
+        if (($row["PWD"]==$userPwd)&&($userPwd!="")){//判斷搜尋出來的PWD是否相符 還有密碼是否空直
           $dbh = NULL;
-          $sUserName = "";
           header(sprintf("Location: index.php", $_SESSION["lastPage"]));
         }else{
           header("Location: login.php");
