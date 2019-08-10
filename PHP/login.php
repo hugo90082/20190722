@@ -4,6 +4,7 @@ if (isset($_GET["logout"]))
 {
   unset($_SESSION["userName"]);
   unset($_SESSION["txtUserName"]);
+  unset($_SESSION["userID"]);
 	header("Location: index.php");
 	exit();
 }
@@ -28,7 +29,7 @@ if (isset($_POST["btnOK"]))
         $dbh->exec("SET CHARACTER SET utf8");
         
         $dbh->beginTransaction();
-        $cmd = $dbh->prepare("select PWD from user where name = :name ");
+        $cmd = $dbh->prepare("select * from user where name = :name ");
 
         $cmd->bindValue(":name", $sUserName);
         $cmd->execute();
@@ -37,6 +38,7 @@ if (isset($_POST["btnOK"]))
         $_SESSION["userName"]=$sUserName;
         if (($row["PWD"]==$userPwd)&&($userPwd!="")){//判斷搜尋出來的PWD是否相符 還有密碼是否空直
           $dbh = NULL;
+          $_SESSION["userID"]=$row["userID"];
           header(sprintf("Location: index.php", $_SESSION["lastPage"]));
         }else{
           header("Location: login.php");
@@ -66,11 +68,11 @@ if (isset($_POST["btnOK"]))
       <td colspan="2" align="center" bgcolor="#CCCCCC"><font color="#FFFFFF">會員系統 - 登入</font></td>
     </tr>
     <tr>
-      <td width="80" align="center" valign="baseline">帳號</td>
+      <td width="80" align="center" valign="baseline">帳號 hugo</td>
       <td valign="baseline"><input type="text" name="txtUserName" id="txtUserName" /></td>
     </tr>
     <tr>
-      <td width="80" align="center" valign="baseline">密碼</td>
+      <td width="80" align="center" valign="baseline">密碼 1234</td>
       <td valign="baseline"><input type="password" name="txtPassword" id="txtPassword" /></td>
     </tr>
     <tr>

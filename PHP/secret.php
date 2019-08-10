@@ -2,11 +2,12 @@
 session_start();
 if (!isset($_SESSION["userName"]))
 {
-	setcookie("lastPage", "secret.php");
+	$_SESSION("lastPage", "secret.php");
 	header("Location: login.php");
 	exit();
 	
 }
+
 
 ?>
 

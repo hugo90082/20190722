@@ -8,12 +8,15 @@ mysqli_select_db($link,$dbname);
 $sqlCommand="select * from commodity";
 $result=mysqli_query($link,$sqlCommand);
 // $row=mysqli_fetch_assoc($result);
+
+
+@$userID = $_SESSION["userID"];
 $YesNo="";
 $CommodityID="";
 $x = date('Y-m-d H:i:s');//取得日期
 if(isset($_GET["CommodityID"])){
   $CommodityID=$_GET["CommodityID"];
-  $sqlCommand2="INSERT INTO transaction VALUES ('','1', $CommodityID, '1','$x')";
+  $sqlCommand2="INSERT INTO transaction VALUES ('',$userID, $CommodityID, '1','$x')";
   $result2=mysqli_query($link,$sqlCommand2);
   $YesNo="加入成功";
 }
@@ -65,7 +68,7 @@ else
       價格</td>
 		<td width="21%" class="shopping_w1"
 			style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2;">
-      數量</td>
+      </td>
     <td></td>
 	</tr>
 
@@ -74,9 +77,12 @@ else
 		<tr>
     <td bgcolor="#e7e7e7"><?=$row['commodityName']; ?></td>
 		<td bgcolor="#e7e7e7"><?=$row['price'] ?></td>
-    <td bgcolor="#e7e7e7"><input id="amount" maxlength="2" size="1" onkeyup="value=value.replace(/[^\d]/g,'') " > 
+    <td bgcolor="#e7e7e7">
+    <input type="button" id="buy" value="加入1個至購物車" onclick="location='index.php?CommodityID=<?=$row['CommodityID']; ?>'">
     <?php if($CommodityID==$row['CommodityID'])echo $YesNo; ?></td>
-		<td bgcolor="#e7e7e7"><input type="button" id="buy" value="加入購物車" onclick="location='index.php?CommodityID=<?=$row['CommodityID']; ?>'"></td>
+		<td bgcolor="#e7e7e7">
+    
+    </td>
 
 	</tr>
   </form>
