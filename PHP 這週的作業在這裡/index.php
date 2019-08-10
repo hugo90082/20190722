@@ -14,11 +14,14 @@ $result=mysqli_query($link,$sqlCommand);
 $YesNo="";
 $CommodityID="";
 $x = date('Y-m-d H:i:s');//取得日期
+$_SESSION[$CommodityID]=0;
 if(isset($_GET["CommodityID"])){
   $CommodityID=$_GET["CommodityID"];
   $sqlCommand2="INSERT INTO transaction VALUES ('',$userID, $CommodityID, '1','$x')";
   $result2=mysqli_query($link,$sqlCommand2);
   $YesNo="加入成功";
+
+  @$_SESSION[$CommodityID."amount"]+=1;
 }
 
 

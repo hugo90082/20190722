@@ -2,9 +2,10 @@
 session_start();
 if (isset($_GET["logout"]))
 {
-  unset($_SESSION["userName"]);
-  unset($_SESSION["txtUserName"]);
-  unset($_SESSION["userID"]);
+  //unset($_SESSION["userName"]);
+  //unset($_SESSION["txtUserName"]);
+  //unset($_SESSION["userID"]); 刪除所有session資料
+  session_destroy();
 	header("Location: index.php");
 	exit();
 }

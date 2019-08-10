@@ -2,11 +2,22 @@
 session_start();
 if (!isset($_SESSION["userName"]))
 {
-	$_SESSION("lastPage", "secret.php");
+	$_SESSION["lastPage"]="secret.php";
 	header("Location: login.php");
 	exit();
 	
 }
+require_once("config.php");
+$link= mysqli_connect($dbhost,$dbuser,$dbpass);
+$result = mysqli_query ( $link, "set names utf8" );
+mysqli_select_db($link,$dbname);
+@$userID = $_SESSION["userID"];
+$sqlCommand="select * from commodity";
+$result=mysqli_query($link,$sqlCommand);
+
+$CommodityID="";
+
+
 
 
 ?>
@@ -42,17 +53,30 @@ if (!isset($_SESSION["userName"]))
 		<td width="21%" class="shopping_w1"
 			style="border-right: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2;">
       數量</td>
-	</tr>
-		<tr id="item_3">
-		<td bgcolor="#e7e7e7"><input type="hidden"
-			name="item3"
-			value="3"></input> 產品名稱</td>
-		<td bgcolor="#e7e7e7">100元</td>
-		<td bgcolor="#e7e7e7"></td>
+
+	<?php while ($row = mysqli_fetch_assoc($result)){?>
+    <form method="post" id="f<?=$row['CommodityID']; ?>"> 
+		<tr>
+    <td bgcolor="#e7e7e7"><?=$row['commodityName']; ?></td>
+		<td bgcolor="#e7e7e7"><?=$row['price'] ?></td>
+    <td bgcolor="#e7e7e7">
+	<?php 
+	if(isset($_SESSION[$row['CommodityID']."amount"])){
+		echo $_SESSION[$row['CommodityID']."amount"]."個"; 
+	}
+	else{
+		echo "0個";
+	}	
+		?>
+    </td>
+		<td bgcolor="#e7e7e7">
+    
+    </td>
 
 	</tr>
-
-	</table>
+  </form>
+  <?php } ?>
+</table>
 </body>
 
 </html>
