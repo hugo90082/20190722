@@ -2,8 +2,9 @@
 session_start();
 if (isset($_GET["logout"]))
 {
-	unset($_SESSION["userName"]);
-	header("Location: index.php");
+  unset($_SESSION["userName"]);
+  unset($_SESSION["txtUserName"]);
+	header("Location: login.php");
 	exit();
 }
 
@@ -15,15 +16,40 @@ if (isset($_POST["btnHome"]))
 
 if (isset($_POST["btnOK"]))
 {
-	$sUserName = $_POST["txtUserName"];
+  $sUserName = $_POST["txtUserName"];
+  $userPwd = $_POST["txtPassword"];
 	if (trim($sUserName) != "")
 	{
-		$_SESSION["userName"]=$sUserName;
-		if (isset($_SESSION["lastPage"]))
-		  header(sprintf("Location: %s", $_SESSION["lastPage"]));
-		else
-		   header("Location: index.php");
-		exit();
+    try
+      {
+        $dbh = new PDO("mysql:host=localhost;dbname=shopping_db",
+                          "root", "");
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh->exec("SET CHARACTER SET utf8");
+        
+        $dbh->beginTransaction();
+
+        // 
+        $cmd = $dbh->prepare("select PWD from user where name = :name ");
+
+        $cmd->bindValue(":name", $sUserName);
+        $cmd->execute();
+        $row = $cmd->fetch();
+
+        $_SESSION["userName"]=$sUserName;
+        if ($row["PWD"]==$userPwd){
+          $dbh = NULL;
+          $sUserName = "";
+          header(sprintf("Location: index.php", $_SESSION["lastPage"]));
+        }else{
+          header("Location: login.php");
+        }exit();
+      } catch (PDOException $err) {
+        $dbh->rollback();
+        echo "Error: " . $err->getMessage();
+        exit();
+      }
+
 	}
 	
 }

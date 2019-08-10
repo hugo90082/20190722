@@ -10,7 +10,7 @@ $result=mysqli_query($link,$sqlCommand);
 // $row=mysqli_fetch_assoc($result);
 $YesNo="";
 $CommodityID="";
-$x = date('Y-m-d H:i:s');
+$x = date('Y-m-d H:i:s');//取得日期
 if(isset($_GET["CommodityID"])){
   $CommodityID=$_GET["CommodityID"];
   $sqlCommand2="INSERT INTO transaction VALUES ('','1', $CommodityID, '1','$x')";
