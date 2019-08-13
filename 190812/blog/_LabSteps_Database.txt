@@ -101,7 +101,13 @@ DB::table('employees')->where('lastName', 'test')->delete()
 
 App\Employee::all();
 App\Employee::find(1);
+App\Employee::where('id','>',1)->get()
+App\Employee::where('id','>',1)->orderby('id','desc')->get()
+App\Employee::where('id','>',1)->first()
+App\Employee::where('id','>',1)->skip(1)->first()
 
+
+App\Employee::select('lastName','id')->where('id','>',0)->first()
 exit
 
 
@@ -119,6 +125,9 @@ exit
 
 Route::get('/', 'EmployeesController@index');
 Route::resource('employees', 'EmployeesController');
+
+
+php artisan make:controller EmployeesController --resource
 
 
 3.2 編輯 app\Http\Controllers\EmployeesController.php
