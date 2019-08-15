@@ -63,7 +63,8 @@ INSERT INTO `message` (`ID`, `topic`, `content`) VALUES
 (3, '【徵】圖資處網路組徵全職工讀生一名', '具備網路維修、基礎電腦維修、基礎電腦文書處理能力(Word,EXCEL,Powerpoint...)。'),
 (7, 'eg45etgdsf', 'sefdfdfdfefsef'),
 (8, 'errrrr', 'rrrrrrddddddddddd'),
-(9, 'fgfffffffffffffff', 'fffggggggggggggggggg');
+(9, 'fgfffffffffffffff', 'fffggggggggggggggggg'),
+(10, 'essssssssssssffffffffffffffffeeeeeeeeee', 'sssssssssssssssssssssssssssssssssssssss');
 
 --
 -- 已傾印資料表的索引
@@ -95,7 +96,7 @@ ALTER TABLE `member`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `message`
 --
 ALTER TABLE `message`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
