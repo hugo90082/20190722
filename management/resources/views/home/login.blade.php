@@ -21,7 +21,7 @@
     
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="ID">帳號</label>  
+      <label class="col-md-4 control-label" for="ID">帳號hugo</label>  
       <div class="col-md-4">
       <input id="ID" name="ID" type="text" placeholder="" class="form-control input-md">
         
@@ -30,7 +30,7 @@
     
     <!-- Password input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="password">密碼</label>
+      <label class="col-md-4 control-label" for="password">密碼1111</label>
       <div class="col-md-4">
         <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
         

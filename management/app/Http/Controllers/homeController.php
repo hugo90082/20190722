@@ -18,18 +18,24 @@ class homeController extends Controller
     
     public function authenticate(Request $request)
     {
-        $item = member::where('name',$request->ID)->where('PWD',$request->password)->first();
-        if(isset($item)){
-            Session::put('memberID', $request->ID );
-            return redirect()->intended('/home');
+        if($request->login=="OK"){
+            $item = member::where('name',$request->ID)->where('PWD',$request->password)->first();
+            if(isset($item)){
+                Session::put('memberID', $request->ID );
+                return redirect()->intended('/home');
+            }
+        }elseif($request->login=="cancel"){
+            return redirect()->intended('/home');//按取消回首葉
         }
-           
+        
         return redirect()->intended('/login');
     }
+
     public function login(Request $request)
     {
         return view("home.login");
     }
+
     public function details($id){
         $messageList = message::find($id);
         return view('home.details', compact('messageList'));
