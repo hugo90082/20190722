@@ -145,7 +145,7 @@
             
             $("#getButton").on("click", function() {
                 var s = $("#userName").val();
-                console.log("!!!!!1")
+                //console.log("!!!!!1")
                 $.get("/hello/" + s, function(e) {
                     $("#reportSpan").text(e);
                 })
@@ -160,17 +160,25 @@
 
 
 
-            // $("#postButton").on("click", function() {
-            //     var dataToServer = {
-            //         firstName: $("#firstNameTextBox").val(),
-            //         lastName: $("#lastNameTextBox").val()
-            //     }
+            $("#postButton").on("click", function() {
+                var dataToServer = {
+                    firstName: $("#firstNameTextBox").val(),
+                    lastName: $("#lastNameTextBox").val()
+                }
+                $.ajax({
+                    type:"post",
+                    url:"/test",
+                    contentType:"application/json",
+                    data:JSON.stringify(dataToServer)
+
+                }).then(function(e){
+                    $("#resultSpan").text(e);
+                })
 
 
 
-
-            //     $("#resultSpan").text(JSON.stringify(dataToServer));
-            // })
+                
+            })
 
 
 

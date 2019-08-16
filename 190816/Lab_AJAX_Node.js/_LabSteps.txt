@@ -132,6 +132,15 @@ node app.js
 5.1	閱讀 https://www.w3schools.com/jquery/ajax_ajax.asp
 	有關於 $.ajax() 的使用說明。
 
+$.ajax({
+    type:"post", //post get put delete
+    url:"127.0.0.1/test",
+    contentType:"application/json",
+    data:
+}).then(function(e){
+
+})
+
 
 5.2	以 HTML Editor 開啟 public/index.html
 
