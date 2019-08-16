@@ -235,3 +235,9 @@
 6.2 存檔後，在瀏覽器檢視作品
     輸入任意內容到文字輸入方塊
 
+
+v-bind: http裡面title之類的 =" 對應JS類別裡面的名稱"
+v-if="seen" 判斷turn  false turn執行
+v-for="單 in 集合"
+v-on:event事件=方法名稱methName
+v-model="對應JS類別裡面的名稱"
