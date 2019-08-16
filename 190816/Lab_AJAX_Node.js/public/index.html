@@ -12,6 +12,7 @@
             font-size: 1.25em;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="nameTextBox">Your name:</label>
                         <div class="col-md-4">
-                            <input name="nameTextBox" id="nameTextBox" type="text" class="form-control input-md">
+                            <input name="userName" id="userName" type="text" class="form-control input-md">
                         </div>
                     </div>
 
@@ -74,7 +75,7 @@
                         <label class="col-md-4 control-label" for="button1id"></label>
                         <div class="col-md-8">
                             <button type="button" id="getButton" name="getButton" class="btn btn-success">Hello -- $.get()</button> &nbsp;
-                            <span id='reportSpan'></span>
+                           <span id='reportSpan' ></span>
                         </div>
                     </div>
                 </form>
@@ -124,30 +125,52 @@
                 $(this).tab('show');
             });
 
-
-            $("#getButton").on("click", function() {
-                var s = $("#nameTextBox").val();
-
-
-
-
-
-                $("#reportSpan").text(s);
-            })
-
-
-
-            $("#postButton").on("click", function() {
-                var dataToServer = {
-                    firstName: $("#firstNameTextBox").val(),
-                    lastName: $("#lastNameTextBox").val()
+            var appGet = new Vue({
+                el:"#getTab",
+                data:{
+                    userName:"",
+                    helloUserName:""
                 }
-
-
-
-
-                $("#resultSpan").text(JSON.stringify(dataToServer));
+                // methods:{
+                //     getButtonClick: function(){
+                //         
+                //         var _this=this;
+                //         $.get("/hello/"+this.userName,function(e){
+                //             _this.helloUserName = e;
+                            
+                //         })
+                //     }
+                // }
             })
+            
+            $("#getButton").on("click", function() {
+                var s = $("#userName").val();
+                console.log("!!!!!1")
+                $.get("/hello/" + s, function(e) {
+                    $("#reportSpan").text(e);
+                })
+
+            })
+           
+            // $("#getButton").on("click", function() {
+            //     var s = $("#nameTextBox").val();
+
+            //     $("#reportSpan").text(s);
+            // })
+
+
+
+            // $("#postButton").on("click", function() {
+            //     var dataToServer = {
+            //         firstName: $("#firstNameTextBox").val(),
+            //         lastName: $("#lastNameTextBox").val()
+            //     }
+
+
+
+
+            //     $("#resultSpan").text(JSON.stringify(dataToServer));
+            // })
 
 
 
