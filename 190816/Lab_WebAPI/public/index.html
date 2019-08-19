@@ -26,7 +26,10 @@
     <div class="row">
 
         <div class="col-sm-4" id="lab">
-            <h2>最新消息 {{ tastOK }}<span class="pull-right"><button id="newItem" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></span></h2>
+            <h2>最新消息 {{ tastOK }}<span class="pull-right">
+            <button v-on:click="newItemClick" id="newItem" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true">
+            </span></button></span></h2>
             <ul id="latestNews" class="list-group">
                 <li v-for="newsItem in newsList" class="list-group-item">
                     {{newsItem.title}} [{{newsItem.ymd}}]<span class="pull-right"><button class="btn btn-info btn-xs editItem">
@@ -60,11 +63,11 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="titleTextBox">
+                        <label for="titleTextBox" >
                             <span class="glyphicon glyphicon-bullhorn"></span>
                             標題
                         </label>
-                        <input type="text"
+                        <input v-model="title" type="text"
                                id="titleTextBox"
                                class="form-control"
                                placeholder="請輸入標題" />
@@ -75,7 +78,7 @@
                             <span class="glyphicon glyphicon-time"></span>
                             日期
                         </label>
-                        <input type="text"
+                        <input v-model="ymd" type="text"
                                id="ymdTextBox"
                                class="form-control"
                                placeholder="yyyy-mm-dd 例如: 2017-05-20">
@@ -113,6 +116,14 @@
 <script type="text/javascript" src="js/jquery.toast.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    var newsModalApp = new Vue({
+        el:"#newsModal",
+        data:{
+            title:"news TTTTT",
+            ymd:"2000-2-9"
+        }
+    })
+
     var appNews = new Vue({
         el:"#lab",
         data:{
@@ -124,15 +135,20 @@
             { ymd: "2017-05-03", title: "Item 4" },
             { ymd: "2017-05-04", title: "Item 5" }
             ]
+        },
+        methods:{
+            newItemClick:function(){
+                $("#newsModal").modal( { backdrop: "static" } );
+            }
         }
     })
-    $.ajax({
-        type:"get",
-        url:"/home/news"
-    }).then(function(dataFromServer){
-        appNews.newsList=JSON.parse(dataFromServer);
-        //alert(typeof dataFromServer)
-    })
+    // $.ajax({
+    //     type:"get",
+    //     url:"/home/news"
+    // }).then(function(dataFromServer){
+    //     appNews.newsList=JSON.parse(dataFromServer);
+    //     //alert(typeof dataFromServer)
+    // })
 
 // 使用方式:
 // showToast("標題", "提示文字") 例如:
@@ -162,14 +178,15 @@ function showToast(heading, message) {
 
 $(function () {
 
-    var newsList =
-        [
-            { ymd: "2017-05-01", title: "Item 1" },
-            { ymd: "2017-05-01", title: "Item 2" },
-            { ymd: "2017-05-02", title: "Item 3" },
-            { ymd: "2017-05-03", title: "Item 4" },
-            { ymd: "2017-05-04", title: "Item 5" }
-        ];
+    // var newsList =
+    //     [
+    //         { ymd: "2017-05-01", title: "Item 1" },
+    //         { ymd: "2017-05-01", title: "Item 2" },
+    //         { ymd: "2017-05-02", title: "Item 3" },
+    //         { ymd: "2017-05-03", title: "Item 4" },
+    //         { ymd: "2017-05-04", title: "Item 5" }
+    //     ];
+    
         //refreshNewsUI();
     // $.get("/home/news", function (e) {
     //     newsList = JSON.parse(e);
@@ -256,12 +273,12 @@ $(function () {
     })
 
 
-    $("#newItem").click(function () {
-        currentIndex = -1;
-        $("#titleTextBox").val("");
-        $("#ymdTextBox").val("");
-        $("#newsModal").modal( { backdrop: "static" } );
-    })
+    // $("#newItem").click(function () {
+    //     currentIndex = -1;
+    //     $("#titleTextBox").val("");
+    //     $("#ymdTextBox").val("");
+    //     $("#newsModal").modal( { backdrop: "static" } );
+    // })
 
 
 })  // end of init.
