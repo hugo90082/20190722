@@ -11,17 +11,22 @@
 <body>
     <div id="lab">
         日期: {{ dateData | dateFormatFilter }}
+        user Name: {{ userName | toUpperFilter}}
     </div>
 
 <script>
     var labApp = new Vue({
         el: "#lab",
         data: {
-            dateData: new Date()
+            dateData: new Date(),
+            userName:"Hugo"
         },
         filters: {
             dateFormatFilter: function (value) {
                 return value.format("yyyy-mm-dd HH:MM:ss");
+            },
+            toUpperFilter: function(value){
+                return value.toUpperCase();
             }
         }
     })

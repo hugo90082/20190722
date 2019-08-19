@@ -31,9 +31,10 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true">
             </span></button></span></h2>
             <ul id="latestNews" class="list-group">
-                <li v-for="newsItem in newsList" class="list-group-item">
-                    {{newsItem.title}} [{{newsItem.ymd}}]<span class="pull-right"><button class="btn btn-info btn-xs editItem">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span></li>
+                <li v-for="newsItem,index in newsList" class="list-group-item">
+                    {{newsItem.title}} [{{newsItem.ymd}}]<span class="pull-right">
+                    <button v-on:click="editItemClick(index)" class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;
+                    <button v-on:click="deleteItemClick(index)" class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span></li>
             </ul>
         </div>
 
@@ -58,7 +59,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4>新增/修改</h4>
+                <h4>新增/修改 {{currentIndex}}</h4>
             </div>
             <div class="modal-body">
                 <form>
@@ -90,7 +91,7 @@
             <div class="modal-footer">
                     <div class="pull-right">
                         <button type="button"
-                                id="okButton"
+                                id="okButton" v-on:click="okButtonClick"
                                 class="btn btn-success">
                             <span class="glyphicon glyphicon-ok"></span> 確定
                         </button>
@@ -119,8 +120,39 @@
     var newsModalApp = new Vue({
         el:"#newsModal",
         data:{
-            title:"news TTTTT",
-            ymd:"2000-2-9"
+            currentIndex:0,
+            title:"",
+            ymd:""
+        },
+        methods:{
+            okButtonClick:function(){
+                if(this.currentIndex<0){
+                    var newItem={
+                        title:this.title,
+                        ymd:this.ymd
+                    }
+                    $.ajax({
+                        type:"post",
+                        url:"/home/news",
+                        data:newItem,
+
+                    })
+                    appNews.newsList.push(newItem);
+                }else{
+                    appNews.newsList[this.currentIndex].title=this.title;
+                    appNews.newsList[this.currentIndex].ymd=this.ymd;
+                    $.ajax({
+                            type: "put",
+                            url: "/home/news",
+                            data: appNews.newsList[this.currentIndex]
+                        })
+                        .then(function (e) {
+                            downloadFromServer();
+                        })
+                }
+
+                $("#newsModal").modal("hide");
+            }
         }
     })
 
@@ -138,17 +170,45 @@
         },
         methods:{
             newItemClick:function(){
+                newsModalApp.currentIndex = -1;
+                newsModalApp.title="";
+                newsModalApp.ymd="";
                 $("#newsModal").modal( { backdrop: "static" } );
+            },
+            editItemClick:function(e){
+                newsModalApp.currentIndex = e;
+                newsModalApp.title=this.newsList[e].title;
+                newsModalApp.ymd=this.newsList[e].ymd;
+                $("#newsModal").modal( { backdrop: "static" } );
+                //alert(this.newsList[e].title)
+            },
+            deleteItemClick:function(e){
+                $.ajax({
+                        type: "delete",
+                        url: "/home/news",
+                        data: this.newsList[e],
+                        success:function(e){
+                            alert(e);
+                        }
+                    })
+                    //.then(function (e) {
+                        downloadFromServer();
+                    //})
             }
         }
     })
-    // $.ajax({
-    //     type:"get",
-    //     url:"/home/news"
-    // }).then(function(dataFromServer){
-    //     appNews.newsList=JSON.parse(dataFromServer);
-    //     //alert(typeof dataFromServer)
-    // })
+    function downloadFromServer(){
+        $.ajax({
+        type:"get",
+        url:"/home/news"
+    }).then(function(dataFromServer){
+        appNews.newsList=JSON.parse(dataFromServer);
+        //alert(typeof dataFromServer)
+    })
+    }
+    $(document).ready(function () {
+        downloadFromServer();
+    })
 
 // 使用方式:
 // showToast("標題", "提示文字") 例如:
@@ -176,112 +236,112 @@ function showToast(heading, message) {
 
 
 
-$(function () {
+// $(function () {
 
-    // var newsList =
-    //     [
-    //         { ymd: "2017-05-01", title: "Item 1" },
-    //         { ymd: "2017-05-01", title: "Item 2" },
-    //         { ymd: "2017-05-02", title: "Item 3" },
-    //         { ymd: "2017-05-03", title: "Item 4" },
-    //         { ymd: "2017-05-04", title: "Item 5" }
-    //     ];
+//     // var newsList =
+//     //     [
+//     //         { ymd: "2017-05-01", title: "Item 1" },
+//     //         { ymd: "2017-05-01", title: "Item 2" },
+//     //         { ymd: "2017-05-02", title: "Item 3" },
+//     //         { ymd: "2017-05-03", title: "Item 4" },
+//     //         { ymd: "2017-05-04", title: "Item 5" }
+//     //     ];
     
-        //refreshNewsUI();
-    // $.get("/home/news", function (e) {
-    //     newsList = JSON.parse(e);
-    //     refreshNewsUI();
-    // })
+//         //refreshNewsUI();
+//     // $.get("/home/news", function (e) {
+//     //     newsList = JSON.parse(e);
+//     //     refreshNewsUI();
+//     // })
 
-    function refreshNewsUI() {
-        $("#latestNews").empty();
+//     function refreshNewsUI() {
+//         $("#latestNews").empty();
 
-        $.each(newsList, function (key, obj) {
-            var newsText = obj.title + " [" + obj.ymd + "]";
-            var $li = $("<li></li>")
-                        .text(newsText)
-                        .addClass("list-group-item");
-            $li.append('<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>');
-            $li.appendTo("#latestNews");
-        })
+//         $.each(newsList, function (key, obj) {
+//             var newsText = obj.title + " [" + obj.ymd + "]";
+//             var $li = $("<li></li>")
+//                         .text(newsText)
+//                         .addClass("list-group-item");
+//             $li.append('<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>');
+//             $li.appendTo("#latestNews");
+//         })
     
-        $(".editItem").click(function () {
-            // var iIndex = $(this).parent().parent().index();
-            var iIndex = $(this).closest("li").index();
-            currentIndex = iIndex;
-            $("#titleTextBox").val(newsList[iIndex].title);
-            $("#ymdTextBox").val(newsList[iIndex].ymd);
-            $("#newsModal").modal( { backdrop: "static" } );
-        })
+//         $(".editItem").click(function () {
+//             // var iIndex = $(this).parent().parent().index();
+//             var iIndex = $(this).closest("li").index();
+//             currentIndex = iIndex;
+//             $("#titleTextBox").val(newsList[iIndex].title);
+//             $("#ymdTextBox").val(newsList[iIndex].ymd);
+//             $("#newsModal").modal( { backdrop: "static" } );
+//         })
 
-        $(".deleteItem").click(function () {
-            var iIndex = $(this).closest("li").index();
-            $.ajax({
-                type: "delete",
-                url: "/home/news",
-                data: newsList[iIndex]
-            })
-            .then(function (e) {
-                showToast(e);
-                $.get("/home/news", function (e) {
-                    newsList = JSON.parse(e);
-                    refreshNewsUI();
-                })
-            })
-        })
+//         $(".deleteItem").click(function () {
+//             var iIndex = $(this).closest("li").index();
+//             $.ajax({
+//                 type: "delete",
+//                 url: "/home/news",
+//                 data: newsList[iIndex]
+//             })
+//             .then(function (e) {
+//                 showToast(e);
+//                 $.get("/home/news", function (e) {
+//                     newsList = JSON.parse(e);
+//                     refreshNewsUI();
+//                 })
+//             })
+//         })
 
-    }  // refreshNewsUI
+//     }  // refreshNewsUI
 
-    var currentIndex = -1;
+//     var currentIndex = -1;
     
-    $("#okButton").click(function () {
-        if (currentIndex >= 0) { // edit
-            newsList[currentIndex].title = $("#titleTextBox").val();
-            newsList[currentIndex].ymd = $("#ymdTextBox").val();
-            refreshNewsUI();
-            $("#newsModal").modal("hide");
+//     // $("#okButton").click(function () {
+//     //     if (currentIndex >= 0) { // edit
+//     //         newsList[currentIndex].title = $("#titleTextBox").val();
+//     //         newsList[currentIndex].ymd = $("#ymdTextBox").val();
+//     //         refreshNewsUI();
+//     //         $("#newsModal").modal("hide");
             
-            $.ajax({
-                type: "put",
-                url: "/home/news",
-                data: newsList[currentIndex]
-            })
-            .then(function (e) {
-                showToast(e);
-            })
-        }
-        else {  // new
-            var newItem = {
-                title: $("#titleTextBox").val(),
-                ymd: $("#ymdTextBox").val()
-            };
-            $.ajax({
-                type: "post",
-                url: "/home/news",
-                data: newItem
-            })
-            .then(function (e) {
-                $.get("/home/news", function (e) {
-                    newsList = JSON.parse(e);
-                    refreshNewsUI();
-                })
-            })
-            $("#newsModal").modal("hide");
-        }
+//     //         $.ajax({
+//     //             type: "put",
+//     //             url: "/home/news",
+//     //             data: newsList[currentIndex]
+//     //         })
+//     //         .then(function (e) {
+//     //             showToast(e);
+//     //         })
+//     //     }
+//     //     else {  // new
+//     //         var newItem = {
+//     //             title: $("#titleTextBox").val(),
+//     //             ymd: $("#ymdTextBox").val()
+//     //         };
+//     //         $.ajax({
+//     //             type: "post",
+//     //             url: "/home/news",
+//     //             data: newItem
+//     //         })
+//     //         .then(function (e) {
+//     //             $.get("/home/news", function (e) {
+//     //                 newsList = JSON.parse(e);
+//     //                 refreshNewsUI();
+//     //             })
+//     //         })
+//     //         $("#newsModal").modal("hide");
+//     //     }
         
         
-    })
+//     // })
 
 
-    // $("#newItem").click(function () {
-    //     currentIndex = -1;
-    //     $("#titleTextBox").val("");
-    //     $("#ymdTextBox").val("");
-    //     $("#newsModal").modal( { backdrop: "static" } );
-    // })
+//     // $("#newItem").click(function () {
+//     //     currentIndex = -1;
+//     //     $("#titleTextBox").val("");
+//     //     $("#ymdTextBox").val("");
+//     //     $("#newsModal").modal( { backdrop: "static" } );
+//     // })
 
 
-})  // end of init.
+// })  // end of init.
 
 </script>
 

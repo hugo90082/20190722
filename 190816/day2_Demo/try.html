@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>try</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="lab">
+        First name:<input type="text" v-model="firstName"> <br>
+        last name:<input type="text" v-model="lastName"> <br>
+        Full name:{{fullName}}
+        Last update:{{lastUpdate}}
+    </div>
+
+
+<script>
+    var labApp = new Vue({
+        el:"#lab",
+        data:{
+            firstName:"1111",
+            lastName:"2222",
+            
+            lastUpdate:""
+        },
+        computed:{
+            fullName:function(){
+                return this.firstName+" "+this.lastName;
+            }
+            
+        },
+        watch:{
+            lastUpdate:function(){
+                return this.fullName;
+            }
+        }
+        // watch:{
+        //     firstName: function(){
+        //         this.fullName = this.firstName+" "+this.lastName;
+        //     },
+        //     lastName: function(){
+        //         this.fullName = this.firstName+" "+this.lastName;
+        //     }
+        // }
+    })
+
+
+</script>
+
+</body>
+</html>
