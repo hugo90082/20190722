@@ -163,8 +163,9 @@
                             downloadFromServer();
                         })
                 }
-
+                
                 $("#newsModal").modal("hide");
+                window.location.reload();
             }
         }
     })
@@ -193,11 +194,12 @@
                 
             },
             editItemClick:function(e){
+                newsModalApp.insert=true;
                 newsModalApp.currentIndex = e;
                 newsModalApp.title=this.newsList[e].title;
                 newsModalApp.ymd=this.newsList[e].ymd;
                 newsModalApp.todo=this.newsList[e].todo;
-                newsModalApp.insert=true;
+                
 
                 $("#newsModal").modal( { backdrop: "static" } );
                 //alert(this.newsList[e].title)
