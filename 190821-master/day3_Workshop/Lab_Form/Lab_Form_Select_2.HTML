@@ -22,9 +22,8 @@
           <label class="col-md-4 control-label" for="city">城市:</label>
           <div class="col-md-4">
             <select id="city" v-model="city" name="city" class="form-control">
-              <option value="2">台北</option>
-              <option value="4">台中</option>
-              <option value="6">台南</option>
+              <option v-for="acity in cityList" v-bind:value="acity.id">{{acity.text}}</option>
+
             </select>
           </div>
         </div>
@@ -39,7 +38,12 @@
 var labApp = new Vue({
   el: "#lab",
   data: {
-    city: 6
+    city: 6,    
+    cityList: [
+      {id: 2, text: "Taipei"},
+      {id: 4, text: "TaiChung"},
+      {id: 6, text: "TaiNan"}
+    ]
   }
 })
 
